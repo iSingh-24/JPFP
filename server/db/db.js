@@ -80,7 +80,14 @@ Campus.hasMany(Student);
 const syncAndSeed = async () => {
   await db.sync({ force: true });
 
-  const [shanu, doop, hogwarts, assassinationClassroom] = await Promise.all([
+  const [
+    shanu,
+    doop,
+    hogwarts,
+    assassinationClassroom,
+    superheroUniversity,
+    avatarUniversity,
+  ] = await Promise.all([
     Student.create({
       firstName: "Shanu",
       lastName: "Aloo",
@@ -105,6 +112,16 @@ const syncAndSeed = async () => {
       address: "Address for Assassination Classroom",
       description: "HELLO WELCOME TO ASSASSINATION CLASSROOM",
     }),
+    Campus.create({
+      name: "SuperHero University",
+      address: "Address for Superhero University",
+      description: "HELLO WELCOME TO SUPERHERO UNIVERSITY",
+    }),
+    Campus.create({
+      name: "Avatar University",
+      address: "Address for Avatar University",
+      description: "HELLO WELCOME TO AVATAR UNIVERSITY",
+    }),
   ]);
 
   shanu.campusId = hogwarts.id;
@@ -114,6 +131,8 @@ const syncAndSeed = async () => {
     doop.save(),
     hogwarts.save(),
     assassinationClassroom.save(),
+    superheroUniversity.save(),
+    avatarUniversity.save(),
   ]);
 };
 //export your db

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+}
+
+.campus {
+  display: flex;
+  float: left;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid black;
+  margin: 5px;
+  background-color: lightgray;
+  border-radius: 25px;
+}
+/* 
+div {
+  border: 2px solid black;
+} */
