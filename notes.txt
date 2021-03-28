@@ -1,0 +1,77 @@
+//NOTES
+
+/**
+ * 1) import { Provider } from "react-redux";
+ * -wrap the App component in the render with the Provider
+ *
+ * 2) Go to App component.
+ *
+ * Add method mapStateToProps
+ * mapStateToProps means which properties of my global application state, do I want to use in this component, and to
+ * which local properties in this component do I want to map them
+ *
+ * //this gets the state passed from Redux
+ * //return a key value pair where key is a property name that you can use in your component
+ *
+ * //the names will be whatever you assigned to them in your combinedReducers I believe
+ * //in the case below we are using all the properties from the global state. this will allow you to simply now pass
+ * their properties in as a prop to a component. i.e) <CampusList campuses = {this.props.campuses} />
+ *
+ * const mapStateToProps = (state) => {
+ *  return {
+ *      students: state.students,
+ *      campuses: state.campuses
+ * }
+ * }
+ *
+ * const mapDispatchToProps = (dispatch) =>{
+ *
+ *  return {
+ *  addStudent: (student) =>{
+ *      dispatch(addStudent(student))  //you can import this as an action creator I believe. Do I need to pass in student as well?
+ *      }
+ *     }
+ * }
+ *
+ * OR IS IT THE PROPER WAY TO DO IT AS
+ *
+ * return {
+ *  addStudent:(student) => {
+ *  dispatch({
+ *      type:"ADD_STUDENT",
+ *       payload: student
+ *          })
+ *      }
+ *  }
+ *
+ *
+ *
+ *
+ *
+ * //connect needs to be imported from 'react-redux'
+ *
+ * 3) call connect function to connect reactjs with redux for your component to have access to the store with the mapStateToProps
+ *
+ * export default connect(mapStateToProps, mapDispatchToProps)(App);
+ *
+ * Why are we calling the connect function? We are calling the connect function because we want to tell react-redux
+ * that I want to connect this component here to my redux store.
+ * I am already providing the store to the whole application, but it doesn't mean it will connect to all of your components.
+ *
+ * This is useful because you can choose which properties and actions you want to choose. This is done with the mapStateToProps
+ * and mapDispatchToProps
+ *
+ *
+ * mapStateToProps tells reactJs which properties of the global state do I want to use in this component, and to which
+ * local properties accessible to the props keyword (i.e) this.props.students , do I want to map the keyword to.
+ *
+ * mapDispatchToProps does the same but not for the properties but for the actions I can execute and send to reducers.
+ *
+ * We can map key value pairs here which will also be accessible with this.props, but we are mapping functions that dispatch
+ * an action that we will use in this app.
+ *
+ *
+ * NOTE: You don't have to connect Redux store with every component, if for simple things, you can still pass it down
+ * as a sub component.
+ *
+ */

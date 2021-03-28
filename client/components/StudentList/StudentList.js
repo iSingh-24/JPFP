@@ -2,7 +2,7 @@ import React from "react";
 import Student from "./Student";
 
 const StudentList = (props) => {
-  console.log(props.students);
+  // console.log(props.students);
 
   let studentList = null;
 
