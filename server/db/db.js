@@ -38,7 +38,8 @@ const Student = db.define("student", {
   },
   imageUrl: {
     type: DataTypes.STRING(1000),
-    defaultValue: "default-image-value",
+    defaultValue:
+      "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
   },
   gpa: {
     type: DataTypes.FLOAT,
@@ -58,9 +59,10 @@ const Campus = db.define("campus", {
   name: {
     type: DataTypes.STRING(50),
   },
-  imgUrl: {
+  imageUrl: {
     type: DataTypes.STRING(1000),
-    defaultValue: "default-image.jpg",
+    defaultValue:
+      "http://www.cranenetworkvle.org/home/images/content/centers/default_thumb.png",
   },
   address: {
     type: DataTypes.STRING(1000),
@@ -92,14 +94,12 @@ const syncAndSeed = async () => {
       firstName: "Shanu",
       lastName: "Aloo",
       email: "sarb@hotmail.com",
-      imageUrl: "shawn.jpg",
       gpa: 3.4,
     }),
     Student.create({
       firstName: "Doop",
       lastName: "Derp",
       email: "derpak@gmail.com",
-      imageUrl: "tucanSam.jpg",
       gpa: 3.2,
     }),
     Campus.create({

@@ -2,13 +2,7 @@ const express = require("express");
 const path = require("path");
 const { syncAndSeed, Student, Campus } = require("./db/db");
 
-//initialize app
 const app = express();
-//require morgan|volleyball, path packages
-//require db from /db
-
-//use morgan|volleyball
-//use express.json()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

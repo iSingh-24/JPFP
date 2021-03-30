@@ -1,50 +1,34 @@
 import React, { Component } from "react";
-import CampusList from "./CampusList/CampusList";
 import "./App.css";
+import { HashRouter, Switch, Route } from "react-router-dom";
+import Navbar from "./Navbar/Navbar";
 import StudentList from "./StudentList/StudentList";
-import { connect } from "react-redux";
-import { fetchCampuses, fetchStudents } from "../actions";
-//why dont i need the loadCampuses, and loadStudents here?
+import CampusList from "./CampusList/CampusList";
+import Home from "./Home/Home";
 
 class App extends Component {
-  async componentDidMount() {
-    await this.props.fetchCampuses();
-    await this.props.fetchStudents();
-    console.log(this.props);
+  constructor(props) {
+    super(props);
   }
+  async componentDidMount() {}
 
   render() {
     return (
-      <div>
-        <h1>Nav Bar Will Go Here</h1>
-        <div className="container">
-          <br></br>
-          <CampusList campuses={this.props.campuses} />
-        </div>
-        <h1>All Students Thus Far Are: </h1>
-        <strong>
-          <StudentList students={this.props.students} />
-        </strong>
+      <div className="App">
+        <Navbar />
+        <HashRouter>
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/api/students" component={StudentList} exact />
+            <Route path="/api/campuses" component={CampusList} exact />
+          </Switch>
+        </HashRouter>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    students: state.students,
-    campuses: state.campuses,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchCampuses: () => dispatch(fetchCampuses()),
-    fetchStudents: () => dispatch(fetchStudents()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
 
 /**
  * Questions
@@ -57,4 +41,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
  *
  * 1) FIX IMAGE URLS FOR CAMPUSES AND MAKE THEM DISPLAY SOMETHING
  * 2) MAKE THE DEFAULT IMAGE SRC ACTUALLY DISPLAY SOMETHING YOU'D WANT PEOPLE TO SEE BY DEFAULT
+ *
+ *
+ * Main Page get rid of all the unnecessary passing down of props, it defeats the purpose of it using mapstatetoprops
+ *
+ * Don't pass anything, just
+ *
+ *
+ *
+ * //
  */

@@ -1,31 +1,30 @@
-import campusReducer from "../reducers/campusReducer";
 import axios from "axios";
 
 export const addStudent = (student) => {
   return {
     type: "ADD_STUDENT",
-    payload: student,
+    student,
   };
 };
 
 export const deleteStudent = (student) => {
   return {
     type: "DELETE_STUDENT",
-    payload: student,
+    student,
   };
 };
 
 export const loadStudents = (students) => {
   return {
     type: "LOAD_STUDENTS",
-    payload: students,
+    students,
   };
 };
 
 export const loadCampuses = (campuses) => {
   return {
     type: "LOAD_CAMPUSES",
-    payload: campuses,
+    campuses,
   };
 };
 
