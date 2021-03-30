@@ -5,6 +5,8 @@ import Navbar from "./Navbar/Navbar";
 import StudentList from "./StudentList/StudentList";
 import CampusList from "./CampusList/CampusList";
 import Home from "./Home/Home";
+import SingleStudent from "./SingleStudent/SingleStudent";
+import SingleCampus from "./SingleCampus/SingleCampus";
 
 class App extends Component {
   constructor(props) {
@@ -19,8 +21,10 @@ class App extends Component {
         <HashRouter>
           <Switch>
             <Route path="/" component={Home} exact />
-            <Route path="/api/students" component={StudentList} exact />
-            <Route path="/api/campuses" component={CampusList} exact />
+            <Route path="/students" component={StudentList} exact />
+            <Route path="/campuses" component={CampusList} exact />
+            <Route path="/students/:id" component={SingleStudent} exact />
+            <Route path="/campuses/:id" component={SingleCampus} exact />
           </Switch>
         </HashRouter>
       </div>

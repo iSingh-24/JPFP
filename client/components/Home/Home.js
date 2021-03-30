@@ -1,15 +1,18 @@
 import React from "react";
 
 const Home = () => {
+  const style = {
+    backgroundColor: "red",
+    display: "inline-block",
+  };
   return (
     <div className="container">
       <h4 className="center">HOME</h4>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
-        consequuntur corrupti nemo, quasi eveniet earum distinctio tempore
-        repellendus dolore cumque labore mollitia? Optio ex facilis autem vero
-        dolorum necessitatibus nam!
-      </p>
+      <img
+        height="500"
+        src="https://media1.giphy.com/media/FbN4MpJnIwLQc/source.gif"
+      ></img>
+      <h4 style={style}>WHO'S READY TO LEARN!!!</h4>
     </div>
   );
 };

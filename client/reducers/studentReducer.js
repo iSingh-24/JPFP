@@ -1,4 +1,7 @@
 const studentReducer = (state = [], action) => {
+  if (action.type === "LOAD_STUDENT") {
+    return action.student;
+  }
   if (action.type === "ADD_STUDENT") {
     return [...state, action.student];
   }

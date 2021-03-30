@@ -37,6 +37,30 @@ app.get("/api/campuses", async (req, res, next) => {
   }
 });
 
+app.get("/api/campuses/:id", async (req, res, next) => {
+  try {
+    // const campus = await Campus.findByPk(req.params.id);
+    const campus = await Campus.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [Student],
+    });
+    res.send(campus);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.get("/api/students/:id", async (req, res, next) => {
+  try {
+    const student = await Student.findByPk(req.params.id);
+    res.send(student);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 //require in your routes and use them on your api path
 
 //404 handler
