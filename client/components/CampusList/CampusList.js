@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCampuses } from "../../actions/index";
+import CreateCampus from "../Forms/CreateCampus";
 
 class CampusList extends Component {
   async componentDidMount() {
@@ -20,7 +21,13 @@ class CampusList extends Component {
         </div>
       ));
     }
-    return <div>{campusList}</div>;
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <CreateCampus />
+        <h1>ALL CAMPUSES</h1>
+        {campusList}
+      </div>
+    );
   }
 }
 

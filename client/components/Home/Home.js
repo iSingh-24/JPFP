@@ -7,7 +7,7 @@ const Home = () => {
   };
   return (
     <div className="container">
-      <h4 className="center">HOME</h4>
+      <h4 className="center">HELLOOOOO PEOPLEEEEEE</h4>
       <img
         height="500"
         src="https://media1.giphy.com/media/FbN4MpJnIwLQc/source.gif"

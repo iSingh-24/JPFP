@@ -1,3 +1,4 @@
+const { default: axios } = require("axios");
 const express = require("express");
 const path = require("path");
 const { syncAndSeed, Student, Campus } = require("./db/db");
@@ -54,8 +55,32 @@ app.get("/api/campuses/:id", async (req, res, next) => {
 
 app.get("/api/students/:id", async (req, res, next) => {
   try {
-    const student = await Student.findByPk(req.params.id);
+    // const student = await Student.findByPk(req.params.id);
+    const student = await Student.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [Campus],
+    });
     res.send(student);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.post("/api/campuses", async (req, res, next) => {
+  try {
+    const newCampus = await Campus.create(req.body);
+    res.send(newCampus);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.post("/api/students", async (req, res, next) => {
+  try {
+    const newStudent = await Student.create(req.body);
+    res.send(newStudent);
   } catch (ex) {
     next(ex);
   }

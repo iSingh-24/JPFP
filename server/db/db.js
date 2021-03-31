@@ -2,7 +2,8 @@ const Sequelize = require("sequelize");
 const { DataTypes } = Sequelize;
 //initialize your db, don't forget to include the possible heroku database URL
 const db = new Sequelize(
-  process.env.DATABASE_URL || "postgres://localhost/schooldb"
+  process.env.DATABASE_URL || "postgres://localhost/schooldb",
+  { logging: false }
 );
 
 // const { Student } = require("./models/Student");
@@ -103,7 +104,7 @@ const syncAndSeed = async () => {
       gpa: 3.2,
     }),
     Campus.create({
-      name: "Hogwarts",
+      name: "Hogwarts Campus",
       address: "Address for Hogwarts",
       description: "HELLO WELCOME TO HOGWARTS!",
     }),
@@ -124,16 +125,8 @@ const syncAndSeed = async () => {
     }),
   ]);
 
-  shanu.campusId = hogwarts.id;
-
-  await Promise.all([
-    shanu.save(),
-    doop.save(),
-    hogwarts.save(),
-    assassinationClassroom.save(),
-    superheroUniversity.save(),
-    avatarUniversity.save(),
-  ]);
+  shanu.setCampus(hogwarts);
+  // doop.setCampus(assassinationClassroom);
 };
 //export your db
 

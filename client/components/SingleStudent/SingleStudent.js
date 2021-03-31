@@ -6,31 +6,52 @@ import { Link } from "react-router-dom";
 class SingleStudent extends Component {
   async componentDidMount() {
     await this.props.fetchStudent(this.props.match.params.id);
-    //console.log(this.props.students);
+    // console.log(this.props.students);
   }
 
   render() {
-    let student = null;
+    let student = this.props.students;
+    let studentData = null;
 
-    student = this.props.students;
-    let studentData = (
-      <div>
-        <img src={student.imageUrl} />
-        <h4>
-          Full Name: {student.firstName} {student.lastName}
-        </h4>
-        <h4>Email: {student.email}</h4>
-        <h4>GPA: {student.gpa}</h4>
-        {student.campusId === null ? (
-          <h4>No Campus Association</h4>
-        ) : (
-          <Link to={`/campuses/${student.campusId}`}>
-            {" "}
-            <h4>Click to see this students campus</h4>{" "}
-          </Link>
-        )}
-      </div>
-    );
+    if (!Array.isArray(this.props.students)) {
+      studentData = (
+        <div>
+          <img src={student.imageUrl} />
+          <h4>
+            Full Name: {student.firstName} {student.lastName}
+          </h4>
+          <h4>Email: {student.email}</h4>
+          <h4>GPA: {student.gpa}</h4>
+          {student.campusId === null ? (
+            <h4>No Campus Association</h4>
+          ) : (
+            <Link to={`/campuses/${student.campusId}`}>
+              {" "}
+              <h4>{student.campus.name}</h4>{" "}
+            </Link>
+          )}
+        </div>
+      );
+    }
+
+    //  studentData = (
+    //   <div>
+    //     <img src={student.imageUrl} />
+    //     <h4>
+    //       Full Name: {student.firstName} {student.lastName}
+    //     </h4>
+    //     <h4>Email: {student.email}</h4>
+    //     <h4>GPA: {student.gpa}</h4>
+    //     {student.campusId === null ? (
+    //       <h4>No Campus Association</h4>
+    //     ) : (
+    //       <Link to={`/campuses/${student.campusId}`}>
+    //         {" "}
+    //         <h4>Click to see this students campus</h4>{" "}
+    //       </Link>
+    //     )}
+    //   </div>
+    // );
 
     return <div>{studentData}</div>;
   }

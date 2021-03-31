@@ -74,4 +74,9 @@
  * NOTE: You don't have to connect Redux store with every component, if for simple things, you can still pass it down
  * as a sub component.
  *
+
+
+ Only use redux if you need to. If you are creating a student there is most likely not a reason to use the redux store because we are 
+ not going to be grabbing the new data. The point of the form is to post a new student or campus. The thunk that fetches the students 
+ and campuses is handled elsewhere so the form component need not worry bout that. 
  */

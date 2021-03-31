@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudents } from "../../actions/index";
+import CreateStudent from "../Forms/CreateStudent";
+
+//FOR THE FETCH TO OCCUR AGAIN DOES MY REDUX STORE STATE NEED TO UPDATE. IN OTHER WORDS DO I NEED TO DELETE IN BOTH MY REDUX STORE AS WELL AS MY DATABASE IF I AM TO CREATE/REMOVE A STUDENT?
 
 class StudentList extends Component {
   async componentDidMount() {
@@ -25,7 +28,14 @@ class StudentList extends Component {
       ));
     }
 
-    return <div>{studentList}</div>;
+    return (
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <CreateStudent />
+        <h1>ALL STUDENTS</h1>
+        {studentList}
+        <br></br>
+      </div>
+    );
   }
 }
 
