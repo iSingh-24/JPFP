@@ -18,7 +18,6 @@ class CampusList extends Component {
   };
 
   render() {
-    console.log(this.props, "campus props");
     let campusList = null;
     if (this.props.campuses.length) {
       campusList = this.props.campuses.map((campus) => (

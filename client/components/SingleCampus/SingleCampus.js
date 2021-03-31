@@ -1,13 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCampus } from "../../actions";
+import { fetchCampus, fetchStudent, fetchStudents } from "../../actions";
 import { Link } from "react-router-dom";
 import UpdateCampus from "../Forms/UpdateCampus";
+import axios from "axios";
 
 class SingleCampus extends Component {
   async componentDidMount() {
     await this.props.fetchCampus(this.props.match.params.id);
+    // await this.props.fetchStudents();
   }
+
+  unregisterStudentHandler = async (event) => {
+    const studentId = event.target.value;
+    const studentToUpdate = this.props.campuses.students.find(
+      (student) => student.id === studentId
+    );
+
+    const updatedStudent = (
+      await axios.put(`/api/students/${studentId}`, {
+        ...studentToUpdate,
+        campusId: null,
+      })
+    ).data;
+
+    // studentToUpdate.campusId = null;
+
+    // const updatedStudent = (
+    //   await axios.put(`/api/students/${studentId}`, studentToUpdate)
+    // ).data;
+
+    this.props.fetchCampus(this.props.match.params.id); //when you do it with match params id it updates the props apparently, rather than if we did just this.props.id?
+  };
 
   render() {
     let campus = [];
@@ -26,6 +50,14 @@ class SingleCampus extends Component {
             Click to see the student information for {student.firstName}{" "}
             {student.lastName}
           </Link>
+          <span> </span>
+          <button
+            type="button"
+            value={student.id}
+            onClick={this.unregisterStudentHandler}
+          >
+            Unregister
+          </button>
         </h4>
       ));
     }
