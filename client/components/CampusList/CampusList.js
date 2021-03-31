@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCampuses } from "../../actions/index";
@@ -6,8 +7,15 @@ import CreateCampus from "../Forms/CreateCampus";
 class CampusList extends Component {
   async componentDidMount() {
     await this.props.fetchCampuses();
-    console.log(this.props);
   }
+
+  deleteCampusHandler = async (event) => {
+    const campusToDeleteId = event.target.value;
+
+    await axios.delete(`/api/campuses/${campusToDeleteId}`);
+
+    this.props.fetchCampuses();
+  };
 
   render() {
     let campusList = null;
@@ -16,7 +24,16 @@ class CampusList extends Component {
         <div key={campus.id}>
           <img height="130" src={campus.imageUrl} />
           <p>
-            <a href={`#/campuses/${campus.id}`}>{campus.name}</a>
+            <a href={`#/campuses/${campus.id}`}>{campus.name} </a>
+            <button
+              type="button"
+              value={campus.id}
+              onClick={this.deleteCampusHandler}
+            >
+              Delete Campus
+            </button>
+            <br></br>
+            <br></br>
           </p>
         </div>
       ));

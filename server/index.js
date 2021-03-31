@@ -86,6 +86,26 @@ app.post("/api/students", async (req, res, next) => {
   }
 });
 
+app.delete("/api/campuses/:id", async (req, res, next) => {
+  try {
+    const removeCampus = await Campus.findByPk(req.params.id);
+    await removeCampus.destroy();
+    res.sendStatus(204);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.delete("/api/students/:id", async (req, res, next) => {
+  try {
+    const removeStudent = await Student.findByPk(req.params.id);
+    await removeStudent.destroy();
+    res.sendStatus(204);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 //require in your routes and use them on your api path
 
 //404 handler
