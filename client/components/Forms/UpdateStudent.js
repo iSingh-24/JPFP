@@ -7,10 +7,10 @@ class UpdateStudent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      gpa: "",
+      firstName: this.props.students.firstName,
+      lastName: this.props.students.lastName,
+      email: this.props.students.email,
+      gpa: this.props.students.gpa,
     };
   }
 
@@ -27,16 +27,17 @@ class UpdateStudent extends Component {
       await axios.put(`/api/students/${this.props.students.id}`, newStudent)
     ).data;
 
-    this.setState({
-      firstName: "",
-      lastName: "",
-      email: "",
-      gpa: "",
-    });
+    // this.setState({
+    //   firstName: "",
+    //   lastName: "",
+    //   email: "",
+    //   gpa: "",
+    // });
     this.props.fetchStudent(this.props.students.id);
   };
 
   render() {
+    console.log(this.props, "THIS PROPS");
     return (
       <div>
         <form

@@ -17,7 +17,7 @@ class SingleStudent extends Component {
     if (!Array.isArray(this.props.students)) {
       studentData = (
         <div>
-          <img src={student.imageUrl} />
+          <img style={{ width: "300px" }} src={student.imageUrl} />
           <h4>
             Full Name: {student.firstName} {student.lastName}
           </h4>
