@@ -106,6 +106,29 @@ app.delete("/api/students/:id", async (req, res, next) => {
   }
 });
 
+app.put("/api/students/:id", async (req, res, next) => {
+  try {
+    const newStudent = await Student.update(req.body, {
+      where: { id: req.params.id },
+    });
+
+    res.send(newStudent);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.put("/api/campuses/:id", async (req, res, next) => {
+  try {
+    const newCampus = await Campus.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.send(newCampus);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 //require in your routes and use them on your api path
 
 //404 handler

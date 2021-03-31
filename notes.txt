@@ -79,4 +79,9 @@
  Only use redux if you need to. If you are creating a student there is most likely not a reason to use the redux store because we are 
  not going to be grabbing the new data. The point of the form is to post a new student or campus. The thunk that fetches the students 
  and campuses is handled elsewhere so the form component need not worry bout that. 
+
+
+
+ //Why do I have to dispatch the thunk that is related to this student in order for it to hard refresh my page (UpateStudent.js)
+
  */

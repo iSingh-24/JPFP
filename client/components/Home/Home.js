@@ -7,10 +7,10 @@ const Home = () => {
   };
   return (
     <div className="container">
-      <h4 className="center">HELLOOOOO PEOPLEEEEEE</h4>
+      <h4 className="center"></h4>
       <img
         height="500"
-        src="https://media1.giphy.com/media/FbN4MpJnIwLQc/source.gif"
+        src="https://steamuserimages-a.akamaihd.net/ugc/924798949903944122/D80A7BA488E755FBBC1AEA97C905992E81CDD2C5/"
       ></img>
       <h4 style={style}>WHO'S READY TO LEARN!!!</h4>
     </div>

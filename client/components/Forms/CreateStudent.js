@@ -39,11 +39,17 @@ class CreateStudent extends Component {
       })
     ).data;
 
+    this.setState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      gpa: "",
+    });
+
     this.props.fetchStudents();
   };
 
   render() {
-    console.log(this.state);
     return (
       <div
         style={{

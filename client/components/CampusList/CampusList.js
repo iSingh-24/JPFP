@@ -18,6 +18,7 @@ class CampusList extends Component {
   };
 
   render() {
+    console.log(this.props, "campus props");
     let campusList = null;
     if (this.props.campuses.length) {
       campusList = this.props.campuses.map((campus) => (
@@ -25,6 +26,8 @@ class CampusList extends Component {
           <img height="130" src={campus.imageUrl} />
           <p>
             <a href={`#/campuses/${campus.id}`}>{campus.name} </a>
+            <br></br>
+            <br></br>
             <button
               type="button"
               value={campus.id}
@@ -42,7 +45,15 @@ class CampusList extends Component {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <CreateCampus />
         <h1>ALL CAMPUSES</h1>
-        {campusList}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-evenly",
+          }}
+        >
+          {campusList}
+        </div>
       </div>
     );
   }

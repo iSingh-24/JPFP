@@ -42,11 +42,21 @@ class StudentList extends Component {
     }
 
     return (
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-        <CreateStudent />
-        <h1>ALL STUDENTS</h1>
-        {studentList}
+      <div>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <h1>ALL STUDENTS</h1>
+        </div>
         <br></br>
+        <CreateStudent />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+          }}
+        >
+          {studentList}
+          <br></br>
+        </div>
       </div>
     );
   }

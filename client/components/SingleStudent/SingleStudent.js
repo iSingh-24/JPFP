@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { fetchStudent } from "../../actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import UpdateStudent from "../Forms/UpdateStudent";
 
 class SingleStudent extends Component {
   async componentDidMount() {
@@ -30,28 +31,12 @@ class SingleStudent extends Component {
               <h4>{student.campus.name}</h4>{" "}
             </Link>
           )}
+          <h3>
+            <UpdateStudent />
+          </h3>
         </div>
       );
     }
-
-    //  studentData = (
-    //   <div>
-    //     <img src={student.imageUrl} />
-    //     <h4>
-    //       Full Name: {student.firstName} {student.lastName}
-    //     </h4>
-    //     <h4>Email: {student.email}</h4>
-    //     <h4>GPA: {student.gpa}</h4>
-    //     {student.campusId === null ? (
-    //       <h4>No Campus Association</h4>
-    //     ) : (
-    //       <Link to={`/campuses/${student.campusId}`}>
-    //         {" "}
-    //         <h4>Click to see this students campus</h4>{" "}
-    //       </Link>
-    //     )}
-    //   </div>
-    // );
 
     return <div>{studentData}</div>;
   }

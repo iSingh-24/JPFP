@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCampus } from "../../actions";
 import { Link } from "react-router-dom";
+import UpdateCampus from "../Forms/UpdateCampus";
 
 class SingleCampus extends Component {
   async componentDidMount() {
@@ -18,7 +19,7 @@ class SingleCampus extends Component {
 
     if (campus.students && campus.students.length !== 0) {
       //the reason why this needs to have the campus.students.length ! === 0 is for the case where everything is loaded up, and even after that a campus with no students will still typically have its campus.students = [] to an empty array. Therefore the message variable will be udpated to an empty array we map over, and the no campuses message will never be displayed. That is why we need the second part of this if statement to be necessary.
-      console.log(campus.students);
+
       message = campus.students.map((student) => (
         <h4 key={student.id}>
           <Link to={`/students/${student.id}`}>
@@ -40,7 +41,12 @@ class SingleCampus extends Component {
       </div>
     );
 
-    return <div>{campusData}</div>;
+    return (
+      <div>
+        <UpdateCampus />
+        {campusData}
+      </div>
+    );
   }
 }
 
