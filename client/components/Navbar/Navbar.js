@@ -5,12 +5,12 @@ const Navbar = () => {
   return (
     <nav className="nav-wrapper pink darken-3 ">
       <div className="container">
-        <a href="/" className="brand-logo left ">
+        <a href="#/" className="brand-logo left ">
           CAMPUSES/STUDENTS
         </a>
         <ul className="right">
           <li>
-            <a href="/">HOME</a>
+            <a href="#/">HOME</a>
           </li>
           <li>
             <a href="#/students">STUDENTS</a>

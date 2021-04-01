@@ -89,4 +89,9 @@
 
  maybe make description not required later for updateCampus.js 
 
+ //whatever the action handler is trying to take care of, is the fetch call association we need to make, cause technically I guess that makes 
+ sense if the other information doesn't change regardless of if its fetched again. if you delete a student, the reference address to the campuses 
+ is still the same if they are an object, which in our case they are, thus even if we change things inside the reference address, there won't be a state 
+ change unless we pass in a new reference address. 
+
  */

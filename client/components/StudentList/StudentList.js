@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudents } from "../../actions/index";
+import { fetchCampuses, fetchStudents } from "../../actions/index";
 import CreateStudent from "../Forms/CreateStudent";
 import axios from "axios";
 
@@ -11,14 +11,7 @@ class StudentList extends Component {
     await this.props.fetchStudents();
   }
 
-  deleteStudentsHandler = async (event) => {
-    const studentToDeleteId = event.target.value;
-
-    await axios.delete(`/api/students/${studentToDeleteId}`);
-    this.props.fetchStudents();
-  };
-  //href becomes the params in the
-  render() {
+  displayStudents() {
     let studentList = null;
     if (this.props.students.length) {
       studentList = this.props.students.map((student) => (
@@ -40,7 +33,18 @@ class StudentList extends Component {
         </div>
       ));
     }
+    return studentList;
+  }
 
+  deleteStudentsHandler = async (event) => {
+    const studentToDeleteId = event.target.value;
+
+    await axios.delete(`/api/students/${studentToDeleteId}`);
+    this.props.fetchStudents();
+    // this.props.fetchCampuses(); //even when I send a brand new reference address it doesn't catch this as a state change why?
+  };
+  //href becomes the params in the
+  render() {
     return (
       <div>
         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
@@ -54,7 +58,7 @@ class StudentList extends Component {
             flexWrap: "wrap",
           }}
         >
-          {studentList}
+          {this.displayStudents()}
           <br></br>
         </div>
       </div>
@@ -65,12 +69,14 @@ class StudentList extends Component {
 const mapStateToProps = (state) => {
   return {
     students: state.students,
+    campuses: state.campuses,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchStudents: () => dispatch(fetchStudents()),
+    fetchCampuses: () => dispatch(fetchCampuses()),
   };
 };
 
