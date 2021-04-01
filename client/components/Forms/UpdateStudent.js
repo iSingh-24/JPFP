@@ -37,7 +37,6 @@ class UpdateStudent extends Component {
   };
 
   render() {
-    console.log(this.props, "THIS PROPS");
     return (
       <div>
         <form

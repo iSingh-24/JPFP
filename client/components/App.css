@@ -5,3 +5,7 @@ img {
 label {
   color: black;
 }
+
+a {
+  display: inline-block;
+}

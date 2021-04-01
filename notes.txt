@@ -84,4 +84,9 @@
 
  //Why do I have to dispatch the thunk that is related to this student in order for it to hard refresh my page (UpateStudent.js)
 
+ TODO: Get a better understanding of how redux store makes state re-render
+ 
+
+ maybe make description not required later for updateCampus.js 
+
  */
