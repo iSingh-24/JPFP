@@ -14,7 +14,7 @@ class CampusList extends Component {
 
     await axios.delete(`/api/campuses/${campusToDeleteId}`);
 
-    this.props.fetchCampuses();
+    await this.props.fetchCampuses();
   };
 
   render() {
@@ -58,11 +58,13 @@ class CampusList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    campuses: state.campuses,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     campuses: state.campuses,
+//   };
+// };
+//HERE WAS CHANGED
+const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
   return {

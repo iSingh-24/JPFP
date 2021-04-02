@@ -7,6 +7,7 @@ import UpdateStudent from "../Forms/UpdateStudent";
 class SingleStudent extends Component {
   async componentDidMount() {
     await this.props.fetchStudent(this.props.match.params.id);
+    console.log(this.props);
     // console.log(this.props.students);
   }
 
@@ -16,24 +17,28 @@ class SingleStudent extends Component {
 
     if (!Array.isArray(this.props.students)) {
       studentData = (
-        <div>
-          <img style={{ width: "300px" }} src={student.imageUrl} />
-          <h4>
-            Full Name: {student.firstName} {student.lastName}
-          </h4>
-          <h4>Email: {student.email}</h4>
-          <h4>GPA: {student.gpa}</h4>
-          {student.campusId === null ? (
-            <h4>No Campus Association</h4>
-          ) : (
-            <Link to={`/campuses/${student.campusId}`}>
-              {" "}
-              <h4>{student.campus.name}</h4>{" "}
-            </Link>
-          )}
-          <h3>
-            <UpdateStudent />
-          </h3>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+          <div>
+            <img style={{ width: "300px" }} src={student.imageUrl} />
+            <h4>
+              Full Name: {student.firstName} {student.lastName}
+            </h4>
+            <h4>Email: {student.email}</h4>
+            <h4>GPA: {student.gpa}</h4>
+            {student.campusId === null ? (
+              <h4>No Campus Association</h4>
+            ) : (
+              <Link to={`/campuses/${student.campusId}`}>
+                {" "}
+                <h4>{student.campus.name}</h4>{" "}
+              </Link>
+            )}
+          </div>
+          <div>
+            <h3>
+              <UpdateStudent />
+            </h3>
+          </div>
         </div>
       );
     }

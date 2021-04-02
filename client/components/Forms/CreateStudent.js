@@ -17,6 +17,7 @@ class CreateStudent extends Component {
       lastName: "",
       email: "",
       gpa: "",
+      showForm: false,
       // campus: "",
     };
   }
@@ -24,6 +25,12 @@ class CreateStudent extends Component {
   createStudentHandler = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+    });
+  };
+
+  toggleForm = () => {
+    this.setState({
+      showForm: !this.state.showForm,
     });
   };
 
@@ -46,11 +53,15 @@ class CreateStudent extends Component {
       gpa: "",
     });
 
-    this.props.fetchStudents();
+    await this.props.fetchStudents();
+
+    this.setState({
+      showForm: false,
+    });
   };
 
-  render() {
-    return (
+  createForm = () => {
+    let formValue = (
       <div
         style={{
           width: "30rem",
@@ -59,7 +70,7 @@ class CreateStudent extends Component {
         }}
       >
         <h3 style={{ backgroundColor: "red", display: "inline-block" }}>
-          CREATE STUDENT FORM
+          ADD STUDENT FORM
         </h3>
         <form onSubmit={this.submitStudentHandler}>
           <div>
@@ -95,26 +106,27 @@ class CreateStudent extends Component {
               onChange={this.createStudentHandler}
               required
             />
-            {/* <label>Image Url</label>
-            <input
-              name="imageUrl"
-              type="text"
-              value={this.state.imageUrl}
-              onChange={this.createStudentHandler}
-            /> */}
-            {/* <label>Campus</label>
-            <input
-              name="campus"
-              type="text"
-              value={this.state.campus}
-              onChange={this.createStudentHandler}
-              required
-            /> */}
           </div>
           <button type="submit" style={{ marginLeft: "150px" }}>
             Submit
           </button>
         </form>
+      </div>
+    );
+
+    return formValue;
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.showForm ? (
+          this.createForm()
+        ) : (
+          <button type="button" onClick={this.toggleForm}>
+            Add Student
+          </button>
+        )}
       </div>
     );
   }

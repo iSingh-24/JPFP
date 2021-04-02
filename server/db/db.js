@@ -16,21 +16,21 @@ const Student = db.define("student", {
     defaultValue: DataTypes.UUIDV4,
   },
   firstName: {
-    type: DataTypes.STRING(15),
+    type: DataTypes.STRING(30),
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   lastName: {
-    type: DataTypes.STRING(15),
+    type: DataTypes.STRING(30),
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   email: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING(100),
     allowNull: false,
     validate: {
       notEmpty: true,

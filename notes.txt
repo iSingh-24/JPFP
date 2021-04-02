@@ -94,4 +94,276 @@
  is still the same if they are an object, which in our case they are, thus even if we change things inside the reference address, there won't be a state 
  change unless we pass in a new reference address. 
 
+
+
+Instead of fetching for the campuses on the createStudent, I could just do a fetch for the campuses on the student list so that I would have 
+access to whichever campuses that were available in the case where I wanted to add a student to a select campus based off that campus id, 
+which I could do by setting a select tag with options based off the campus names which I could probably do in a map of option tags inside of
+a select tag. Afterwards upon submit, I would make the student I am creating's Id equal to the campusId with a campus.find() function to find the 
+matching respective Id. 
+
+
+I could also probably on the singleCampus page, have an addStudent form, which would add a student directly to this campus, rather than the 
+all campuses component where I would give an option to pick a campus to add to. This would be possible because we would have our campus which is 
+going to be the object that is fetched by our initial thunk and stored in our state so we could just take the campus id from there and assign it 
+to whatever student we plan on adding. Cool. 
+
+
+StudentList 
+
+THE REASON WHY THE PAGE DIDN'T RERENDER WAS BECAUSE SURE I HAD DELETED THE STUDENT IN MY DATABASE, BUT UNTIL I DO A FETCH STUDENTS, THE 
+STUDENTS THAT ARE ON THE PAGE WON'T BE UPDATED WITH THE NEW BATCH OF STUDENTS, SO IT IN A SENSE STILL SHOWED THE SAME STUDENTS! THE PAGE 
+WAS RERENDERING BUT THE STUDENTS WASN'T UPDATED SINCE AFTER DELETING THE STUDENTS I HAD TO FETCH THEM AGAIN AND BECAUSE OF THAT WHEN I DID
+THE FETCH STUDENTS AGAIN IT UPDATED THE PAGE. THE STUDENTS WERE NOT UPDATED SO THE SAME STUDENTS WERE SHOWN THE WHOLE TIME!!!
+
+
+
+SINGLE CAMPUS 
+
+THE REASON WHY WE HAVE ACCESS TO THE CAMPUS IS BECAUSE SINCE I CALL IS BECAUSE I DON'T HAVE A COMPONENT DID UNMOUNT SO NO REFRESH OCCURS, 
+WHICH IS WHY THE STATE CAN BE ACCESSED BY THE UPDATECAMPUS PAGE. IF I HAD SOME SORT OF UNMOUNT IT WOULD BE USEFUL FOR THINGS LIKE WHERE SAY 
+I HAVE A SETTIMEOUT THAT SHOWS AN INCREMENTER ON THE SCREEN AND AFTER LIKE THE NUMBER INCREMENTS BY LIKE 10, I DON'T WANT TO SHOW IT ANYMORE
+THATS WHEN I WOULD USE COMPONENTWILLUNMOUNT SO THAT I DON'T HAVE TO CONTINUE SEEING THAT ANYMORE. 
+
+I WAS ABLE TO ACCESS FROM STORE BECAUSE THE COMPONENT WAS ON THE SAME PAGE THAT THE UPDATECAMPUS WAS LOADED ONTO SO THEY WERE ABLE TO SHARE
+THE REDUX STORE. I AM PRETTY SURE THAT IS HOW IT WENT. 
+
+
  */
+
+UPDATE CAMPUS ISSUE FIX
+
+-I PASSED DOWN THE PROPS WHICH GAVE ME THE HISTORY FROM WHICH I GRABBED THE PARAMS I NEEDED FOR MY CAMPUS ID THAT I NEEDED TO FETCH, 
+WHICH I FETCHED WITH MY THUNK AFTER THAT. THE REASON IT WASN'T WORKING BEFORE WAS BECAUSE IN MY THUNK I WAS TRYING TO FETCH AN ID THAT
+HADN'T BEEN IN MY PROPS FOR SOME REASON. IT WOULD BE INTERESTING THOUGH TO FIGURE OUT WHY THE PROPS DIDN'T HAVE THE ID OF THE SINGLE CAMPUS 
+IN THEM IN THE REDUX STORE THAT TYPICALLY SHOULD HAVE BEEN SHARED. BUT GOOD JOB FIGURING OUT THIS WAY TO IT. YOU ARE A G. 
+
+
+
+/*
+CREATESTUDENT.js
+
+
+
+//we will make this a class that has it's own state so that we can store what the user is giving us. We don't need to use the redux store for this component
+
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchStudents } from "../../actions";
+import axios from "axios";
+import "../App.css";
+
+class CreateStudent extends Component {
+  constructor(props) {
+    super(props);
+
+    //IF AN ERROR PERSIST LATER, REMEMBER WE TOOK OUT imageUrl for now in the this.state below
+
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      gpa: "",
+      showForm: false,
+      // campus: "",
+    };
+  }
+
+  createStudentHandler = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  toggleForm = () => {
+    this.setState({
+      showForm: !this.state.showForm,
+    });
+  };
+
+  submitStudentHandler = async (event) => {
+    event.preventDefault();
+
+    const student = (
+      await axios.post("/api/students", {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        gpa: this.state.gpa,
+      })
+    ).data;
+
+    this.setState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      gpa: "",
+    });
+
+    this.props.fetchStudents();
+  };
+
+  render() {
+    let formValue = (
+      <div
+        style={{
+          width: "30rem",
+          backgroundColor: "lightgray",
+          border: "2px solid black",
+        }}
+      >
+        <h3 style={{ backgroundColor: "red", display: "inline-block" }}>
+          ADD STUDENT FORM
+        </h3>
+        <form onSubmit={this.submitStudentHandler}>
+          <div>
+            <label>First Name:</label>
+            <input
+              type="text"
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.createStudentHandler}
+              required
+            />
+            <label>Last Name:</label>
+            <input
+              name="lastName"
+              type="text"
+              value={this.state.lastName}
+              onChange={this.createStudentHandler}
+              required
+            />
+            <label>Email:</label>
+            <input
+              name="email"
+              type="text"
+              value={this.state.email}
+              onChange={this.createStudentHandler}
+              required
+            />
+            <label>GPA: </label>
+            <input
+              name="gpa"
+              type="text"
+              value={this.state.gpa}
+              onChange={this.createStudentHandler}
+              required
+            />
+            {/* <label>Image Url</label>
+        <input
+          name="imageUrl"
+          type="text"
+          value={this.state.imageUrl}
+          onChange={this.createStudentHandler}
+        /> */}
+            {/* <label>Campus</label>
+        <input
+          name="campus"
+          type="text"
+          value={this.state.campus}
+          onChange={this.createStudentHandler}
+          required
+        /> */}
+          </div>
+          <button type="submit" style={{ marginLeft: "150px" }}>
+            Submit
+          </button>
+        </form>
+      </div>
+    );
+
+    return (
+      // <div
+      //   style={{
+      //     width: "30rem",
+      //     backgroundColor: "lightgray",
+      //     border: "2px solid black",
+      //   }}
+      // >
+      //   <h3 style={{ backgroundColor: "red", display: "inline-block" }}>
+      //     ADD STUDENT FORM
+      //   </h3>
+      //   <form onSubmit={this.submitStudentHandler}>
+      //     <div>
+      //       <label>First Name:</label>
+      //       <input
+      //         type="text"
+      //         name="firstName"
+      //         value={this.state.firstName}
+      //         onChange={this.createStudentHandler}
+      //         required
+      //       />
+      //       <label>Last Name:</label>
+      //       <input
+      //         name="lastName"
+      //         type="text"
+      //         value={this.state.lastName}
+      //         onChange={this.createStudentHandler}
+      //         required
+      //       />
+      //       <label>Email:</label>
+      //       <input
+      //         name="email"
+      //         type="text"
+      //         value={this.state.email}
+      //         onChange={this.createStudentHandler}
+      //         required
+      //       />
+      //       <label>GPA: </label>
+      //       <input
+      //         name="gpa"
+      //         type="text"
+      //         value={this.state.gpa}
+      //         onChange={this.createStudentHandler}
+      //         required
+      //       />
+      //       {/* <label>Image Url</label>
+      //       <input
+      //         name="imageUrl"
+      //         type="text"
+      //         value={this.state.imageUrl}
+      //         onChange={this.createStudentHandler}
+      //       /> */}
+      //       {/* <label>Campus</label>
+      //       <input
+      //         name="campus"
+      //         type="text"
+      //         value={this.state.campus}
+      //         onChange={this.createStudentHandler}
+      //         required
+      //       /> */}
+      //     </div>
+      //     <button
+      //       type="submit"
+      //       style={{ marginLeft: "150px" }}
+      //       onClick={this.toggleForm}
+      //     >
+      //       Submit
+      //     </button>
+      //   </form>
+      // </div>
+      <div>
+        {this.state.showForm ? (
+          formValue
+        ) : (
+          <button type="button" onClick={this.toggleForm}>
+            Add Student
+          </button>
+        )}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchStudents: () => dispatch(fetchStudents()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateStudent);
+
+
+*/

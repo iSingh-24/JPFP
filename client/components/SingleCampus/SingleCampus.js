@@ -30,15 +30,19 @@ class SingleCampus extends Component {
     //   await axios.put(`/api/students/${studentId}`, studentToUpdate)
     // ).data;
 
-    this.props.fetchCampus(this.props.match.params.id); //when you do it with match params id it updates the props apparently, rather than if we did just this.props.id?
+    await this.props.fetchCampus(this.props.match.params.id); //when you do it with match params id it updates the props apparently, rather than if we did just this.props.id?
   };
 
   render() {
-    let campus = [];
+    // console.log("Single Campus", this.props);
+    //let campus = [];
+    let campus = this.props.campuses;
     let campusData = "...loading";
     let message = <h4>There are no students enrolled in this campus</h4>;
 
-    campus = this.props.campuses;
+    // console.log(this.props, "RENDERLSAJFLJASKFLJSAFL");
+
+    // campus = this.props.campuses;
     //console.log(campus.students);
 
     if (campus.students && campus.students.length !== 0) {
@@ -75,7 +79,7 @@ class SingleCampus extends Component {
 
     return (
       <div>
-        <UpdateCampus />
+        <UpdateCampus idForCampus={this.props} />
         {campusData}
       </div>
     );

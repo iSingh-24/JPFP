@@ -12,6 +12,7 @@ class UpdateStudent extends Component {
       email: this.props.students.email,
       gpa: this.props.students.gpa,
     };
+    console.log(this.props.students);
   }
 
   updateStudentHandler = (event) => {
@@ -33,7 +34,7 @@ class UpdateStudent extends Component {
     //   email: "",
     //   gpa: "",
     // });
-    this.props.fetchStudent(this.props.students.id);
+    await this.props.fetchStudent(this.props.students.id);
   };
 
   render() {

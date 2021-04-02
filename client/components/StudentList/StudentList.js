@@ -9,6 +9,7 @@ import axios from "axios";
 class StudentList extends Component {
   async componentDidMount() {
     await this.props.fetchStudents();
+    // await this.props.fetchCampuses(); //I added this line in case we need to in the future, add a student to one of the available campuses
   }
 
   displayStudents() {
@@ -40,9 +41,14 @@ class StudentList extends Component {
     const studentToDeleteId = event.target.value;
 
     await axios.delete(`/api/students/${studentToDeleteId}`);
-    this.props.fetchStudents();
-    // this.props.fetchCampuses(); //even when I send a brand new reference address it doesn't catch this as a state change why?
+    await this.props.fetchStudents();
   };
+
+  // async componentDidUpdate(prevProps) {
+  //   await console.log(prevProps, "prev props");
+  //   await console.log(this.props, "currentProps ");
+  // }
+
   //href becomes the params in the
   render() {
     return (

@@ -9,11 +9,6 @@ import SingleStudent from "./SingleStudent/SingleStudent";
 import SingleCampus from "./SingleCampus/SingleCampus";
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-  async componentDidMount() {}
-
   render() {
     return (
       <div className="App" style={{ backgroundColor: "lightpink" }}>
