@@ -70,7 +70,12 @@ app.get("/api/students/:id", async (req, res, next) => {
 
 app.post("/api/campuses", async (req, res, next) => {
   try {
-    const newCampus = await Campus.create(req.body);
+    const { name, address } = req.body;
+
+    const newCampus = await Campus.create({
+      name,
+      address,
+    });
     res.send(newCampus);
   } catch (ex) {
     next(ex);
