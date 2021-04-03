@@ -58,12 +58,6 @@ class CampusList extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     campuses: state.campuses,
-//   };
-// };
-//HERE WAS CHANGED
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {

@@ -70,7 +70,3 @@ export const fetchCampus = (campusId) => {
     dispatch(loadCampus(campus));
   };
 };
-//we pass in studentId because we need to find a single student by the id we ourselves pass in from the single student component
-
-//whatever we export from this file, we need to destructure with the same name we gave it in here when bringing it in wherever we import it
-//export other action creaters here

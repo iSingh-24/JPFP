@@ -28,12 +28,6 @@ class UpdateStudent extends Component {
       await axios.put(`/api/students/${this.props.students.id}`, newStudent)
     ).data;
 
-    // this.setState({
-    //   firstName: "",
-    //   lastName: "",
-    //   email: "",
-    //   gpa: "",
-    // });
     await this.props.fetchStudent(this.props.students.id);
   };
 
@@ -94,5 +88,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateStudent);
-
-//Why do I have to dispatch the thunk that is related to this student in order for it to hard refresh my page

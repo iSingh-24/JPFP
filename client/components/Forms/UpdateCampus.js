@@ -14,7 +14,7 @@ class UpdateCampus extends Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchCampus(this.props.idForCampus.match.params.id);
+    await this.props.fetchCampus(this.props.idForCampus);
 
     this.setState({
       name: this.props.campuses.name,
@@ -36,17 +36,10 @@ class UpdateCampus extends Component {
       await axios.put(`/api/campuses/${this.props.campuses.id}`, newCampus)
     ).data;
 
-    // this.setState({
-    //   name: "",
-    //   address: "",
-    //   description: "",
-    // });
-
     this.props.fetchCampus(this.props.campuses.id);
   };
 
   render() {
-    // console.log("render", this.props);
     return (
       <div>
         <form onSubmit={this.submitUpdatesHandler}>

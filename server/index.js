@@ -129,12 +129,6 @@ app.put("/api/campuses/:id", async (req, res, next) => {
   }
 });
 
-//require in your routes and use them on your api path
-
-//404 handler
-
-//500 handler
-
 //set PORT
 const init = async () => {
   try {

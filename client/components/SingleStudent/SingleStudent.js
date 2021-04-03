@@ -7,8 +7,6 @@ import UpdateStudent from "../Forms/UpdateStudent";
 class SingleStudent extends Component {
   async componentDidMount() {
     await this.props.fetchStudent(this.props.match.params.id);
-    console.log(this.props);
-    // console.log(this.props.students);
   }
 
   render() {
@@ -56,11 +54,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleStudent);
-
-/* <h4
-            onClick={() =>
-              this.props.history.push(`/campuses/${student.campusId}`)
-            }
-          >
-            Associated with the campus Id of {student.campusId}
-          </h4> */

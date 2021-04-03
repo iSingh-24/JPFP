@@ -1,5 +1,3 @@
-//we will make this a class that has it's own state so that we can store what the user is giving us. We don't need to use the redux store for this component
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudents } from "../../actions";
@@ -10,15 +8,12 @@ class CreateStudent extends Component {
   constructor(props) {
     super(props);
 
-    //IF AN ERROR PERSIST LATER, REMEMBER WE TOOK OUT imageUrl for now in the this.state below
-
     this.state = {
       firstName: "",
       lastName: "",
       email: "",
       gpa: "",
       showForm: false,
-      // campus: "",
     };
   }
 

@@ -6,9 +6,6 @@ const db = new Sequelize(
   { logging: false }
 );
 
-// const { Student } = require("./models/Student");
-// const { Campus } = require("./models/Campus");
-
 const Student = db.define("student", {
   id: {
     type: DataTypes.UUID,

@@ -4,12 +4,9 @@ import { fetchCampuses, fetchStudents } from "../../actions/index";
 import CreateStudent from "../Forms/CreateStudent";
 import axios from "axios";
 
-//FOR THE FETCH TO OCCUR AGAIN DOES MY REDUX STORE STATE NEED TO UPDATE. IN OTHER WORDS DO I NEED TO DELETE IN BOTH MY REDUX STORE AS WELL AS MY DATABASE IF I AM TO CREATE/REMOVE A STUDENT?
-
 class StudentList extends Component {
   async componentDidMount() {
     await this.props.fetchStudents();
-    // await this.props.fetchCampuses(); //I added this line in case we need to in the future, add a student to one of the available campuses
   }
 
   displayStudents() {
@@ -44,12 +41,6 @@ class StudentList extends Component {
     await this.props.fetchStudents();
   };
 
-  // async componentDidUpdate(prevProps) {
-  //   await console.log(prevProps, "prev props");
-  //   await console.log(this.props, "currentProps ");
-  // }
-
-  //href becomes the params in the
   render() {
     return (
       <div>
